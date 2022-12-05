@@ -1,17 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "outDir": "../../../dist/out-tsc",
+    "types": ["node", "vite/client"]
   },
-  "exclude": [
-    "jest.config.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts",
-    "src/**/__tests__/*"
-  ],
-  "include": ["env.d.ts", "main.ts", "src/**/*.ts", "src/**/*.vue"]
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+  "include": ["**/*.ts", "**/*.vue", "../../../vite.config.ts"]
 }

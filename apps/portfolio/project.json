@@ -9,7 +9,8 @@
       "executor": "@nrwl/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "portfolio:build"
+        "buildTarget": "portfolio:build",
+        "hmr": true
       },
       "configurations": {}
     },

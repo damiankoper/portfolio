@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { BackgroundDynamic } from '@portfolio/ui/background';
 import { RouterLink, RouterView } from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue';
 </script>
 
 <template>
   <header>
+    <BackgroundDynamic />
     <img
       alt="Vue logo"
       class="logo"
@@ -14,7 +16,7 @@ import HelloWorld from './components/HelloWorld.vue';
     />
 
     <div class="wrapper">
-      <HelloWorld msg="hej" />
+      <HelloWorld msg="hejjjjjasdadasdj" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
