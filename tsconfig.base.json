@@ -8,21 +8,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "ESNext",
+    "target": "es2015",
     "module": "esnext",
-    "lib": ["ESNext", "dom"],
+    "lib": ["es2017", "dom"],
+    "allowJs": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "jsx": "preserve",
     "baseUrl": ".",
-    "useDefineForClassFields": true,
-    "strict": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
     "paths": {
-      "@portfolio/ui/background": ["libs/ui/background/src/index.ts"]
+      "@portfolio/background/core": ["libs/background/core/src/index.ts"],
+      "@portfolio/background/ui": ["libs/background/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import { BackgroundDynamic } from '@portfolio/ui/background';
+import { DynamicBackground } from '@portfolio/background/ui';
 import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue';
 </script>
 
 <template>
   <header>
-    <BackgroundDynamic />
     <img
       alt="Vue logo"
       class="logo"
-      src="@/assets/logo.svg"
+      src="./assets/logo.svg"
       width="125"
       height="125"
     />
-
+    <Header text="xd" />
     <div class="wrapper">
-      <HelloWorld msg="hejjjjjasdadasdj" />
+      <DynamicBackground msg="hej" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
