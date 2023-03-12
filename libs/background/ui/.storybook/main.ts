@@ -1,16 +1,15 @@
-import { rootMain } from '../../../../.storybook/main';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import rootMain from '../../../../.storybook/main';
+import libConfig from '../vite.config';
+import { mergeConfig, UserConfigExport } from 'vite';
 
-import type { StorybookConfig, Options } from '@storybook/core-common';
-
-const config: StorybookConfig = {
+export default {
   ...rootMain,
-  core: { ...rootMain.core, builder: '@storybook/builder-vite' },
   stories: [
-    ...rootMain.stories,
     '../src/lib/**/*.stories.mdx',
     '../src/lib/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  addons: [...(rootMain.addons || [])],
+  async viteFinal(config: UserConfigExport) {
+    return mergeConfig(config, libConfig);
+  },
 };
-
-module.exports = config;

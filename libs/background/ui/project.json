@@ -6,20 +6,14 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/background/ui/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/background/ui/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/vite:test",
-      "outputs": [
-        "coverage/libs/background/ui"
-      ],
+      "outputs": ["coverage/libs/background/ui"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../coverage/libs/background/ui"
@@ -30,34 +24,8 @@
       "options": {
         "uiFramework": "@storybook/vue3",
         "port": 4400,
-        "config": {
-          "configFolder": "libs/background/ui/.storybook"
-        }
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
-    },
-    "build-storybook": {
-      "executor": "@nrwl/storybook:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "uiFramework": "@storybook/vue3",
-        "outputPath": "dist/storybook/background-ui",
-        "config": {
-          "configFolder": "libs/background/ui/.storybook"
-        }
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
+        "configDir": "libs/background/ui/.storybook"
       }
     }
-  },
-  "tags": []
+  }
 }

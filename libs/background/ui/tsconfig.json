@@ -13,8 +13,7 @@
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "types": ["element-plus/global"]
+    "noImplicitReturns": true
   },
   "files": [],
   "include": [],
@@ -26,7 +25,7 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "./.storybook/tsconfig.json"
+      "path": "./.storybook/tsconfig.sb.json"
     }
   ]
 }

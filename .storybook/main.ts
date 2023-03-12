@@ -1,11 +1,7 @@
-import type { StorybookViteConfig } from '@storybook/builder-vite';
-import { mergeConfig } from 'vite';
-import baseConfig from '../vite.config';
+import { StorybookConfig } from '@storybook/types';
 
-export const rootMain: StorybookViteConfig = {
+export default {
+  addons: ['@storybook/addon-essentials', '@storybook/addon-actions'],
+  framework: '@storybook/vue3-vite',
   stories: [],
-  addons: ['@storybook/addon-essentials'],
-  async viteFinal(config) {
-    return mergeConfig(config, baseConfig);
-  },
-};
+} satisfies StorybookConfig;

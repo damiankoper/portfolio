@@ -1,17 +1,19 @@
 import DynamicBackground from './DynamicBackground.vue';
-import { Meta, Story } from '@storybook/vue3';
+import { Meta, StoryObj } from '@storybook/vue3';
 
-export default {
-  title: 'DynamicBackground',
+const meta = {
   component: DynamicBackground,
-} as Meta;
+  decorators: [
+    () => ({
+      template: '<div style="height:100vh"><story/></div>',
+    }),
+  ],
+  parameters: {
+    layout: 'fullscreen',
+  },
+} satisfies Meta<typeof DynamicBackground>;
 
-export const DynamicBackgroundDevelopment: Story = (args) => ({
-  components: { DynamicBackground },
-  template: `
-  <DynamicBackground
-    style="position:fixed;top:0;left:0;height:100vh;width:100vw;"
-    v-bind="args"
-  />`,
-  setup: () => ({ args }),
-});
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Base: Story = {};
