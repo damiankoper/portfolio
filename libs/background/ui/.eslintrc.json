@@ -1,24 +1,18 @@
 {
   "extends": [
     "../../../.eslintrc.json",
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/eslint-config-typescript",
-    "@vue/eslint-config-prettier"
+    "plugin:vue/vue3-recommended",
+    "@vue/typescript/recommended",
+    "prettier"
   ],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "project": ["libs/background/ui/tsconfig.lib.json"]
+  },
+  "rules": {},
   "ignorePatterns": ["!**/*"],
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "rules": {}
-    }
-  ]
+  "env": {
+    "node": true
+  }
 }

@@ -1,4 +1,4 @@
-import { StorybookConfig } from '@storybook/types';
+import { StorybookConfig } from '@storybook/vue3-vite';
 
 export default {
   addons: ['@storybook/addon-essentials', '@storybook/addon-actions'],
