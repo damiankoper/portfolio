@@ -1,34 +1,28 @@
-import { Vector3 } from 'three';
+import { Curve, SplineCurve, Vector2, Vector3 } from 'three';
 import { PathPipeSegmentType } from './PathPipe.interface';
 
-const width = 0.5;
+const width = 1;
 export const pathPipe = [
   {
     type: 'cup',
     start: new Vector3(0, 5, 0),
     width,
-    pathPoint: new Vector3(4, 3, 0),
-    excludeScroll: true,
   },
   {
     type: 'line',
     start: new Vector3(0, 5, 0),
-    pathPoint: new Vector3(4, 5, 0),
     width,
     end: new Vector3(0, 2, 0),
-    excludeScroll: true,
   },
   {
     type: 'line',
     start: new Vector3(0, 2, 0),
-    pathPoint: new Vector3(4, 2, 0),
     width,
     end: new Vector3(0, 0, 0),
   },
   {
     type: 'arc',
     start: new Vector3(0, 0, 0),
-    pathPoint: new Vector3(4, 0, 0),
     width,
     radius: 2,
     variant: 'top-right',
@@ -36,7 +30,6 @@ export const pathPipe = [
   {
     type: 'arc',
     start: new Vector3(2, -2, 0),
-    pathPoint: new Vector3(4, -2, 0),
     width,
     radius: 2,
     variant: 'left-bottom',
@@ -44,7 +37,6 @@ export const pathPipe = [
   {
     type: 'line',
     start: new Vector3(4, -4, 0),
-    pathPoint: new Vector3(4, -4, 0),
     width,
     end: new Vector3(4, -10, 0),
   },
@@ -52,6 +44,12 @@ export const pathPipe = [
     type: 'cup',
     start: new Vector3(4, -10, 0),
     width,
-    pathPoint: new Vector3(4, -10, 0),
   },
 ] satisfies PathPipeSegmentType[];
+
+export const camPath: Curve<Vector2> = new SplineCurve([
+  new Vector2(6, 2.5),
+  new Vector2(6, -1),
+  new Vector2(4, -8),
+  new Vector2(4, -15),
+]);

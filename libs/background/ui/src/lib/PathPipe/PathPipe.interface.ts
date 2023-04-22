@@ -8,9 +8,7 @@ export type PathPipeSegmentType =
 interface PathPipeSegment {
   type: string;
   start: Vector3;
-  pathPoint?: Vector3;
   width: number;
-  excludeScroll?: boolean;
 }
 
 export interface PathPipeCupSegment extends PathPipeSegment {

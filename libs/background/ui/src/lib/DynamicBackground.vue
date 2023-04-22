@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { Camera, Renderer, Scene, RendererPublicInterface } from 'troisjs';
 
-import { SplineCurve, Vector2 } from 'three';
 import { onMounted, ref, watch, provide } from 'vue';
 import PathPipe from './PathPipe/PathPipe.vue';
-import { pathPipe } from './PathPipe/PathPipe.model';
+import { camPath } from './PathPipe/PathPipe.model';
 import TitleSection from './TitleSection/TitleSection.vue';
 import { rendererKey } from './Renderer.key';
 
@@ -19,16 +18,6 @@ const props = withDefaults(
   }
 );
 
-const camPath = new SplineCurve(
-  pathPipe
-    .filter((s) => !s.excludeScroll)
-    .map((s) => {
-      const point = s.pathPoint || s.start;
-      return new Vector2(point.x, point.y);
-    })
-);
-
-const color = '#22005D';
 const renderer = ref<RendererPublicInterface>();
 provide(rendererKey, renderer);
 
@@ -62,10 +51,10 @@ onMounted(() => {
   <div id="anchored"></div>
   <div class="wrapper">
     <Renderer ref="renderer" alpha antialias :orbit-ctrl="{}" resize>
-      <Camera :position="{ z: 10 }" />
+      <Camera :position="{ z: 100 }" />
       <Scene>
-        <PathPipe :color="color" />
-        <TitleSection :color="color" />
+        <PathPipe />
+        <TitleSection />
       </Scene>
     </Renderer>
   </div>

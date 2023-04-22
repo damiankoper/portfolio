@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@portfolio/background/core": ["libs/background/core/src/index.ts"],
-      "@portfolio/background/ui": ["libs/background/ui/src/index.ts"]
+      "@portfolio/background/ui": ["libs/background/ui/src/index.ts"],
+      "@portfolio/theme": ["libs/theme/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

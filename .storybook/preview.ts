@@ -3,12 +3,21 @@ import { StoryObj, setup, StoryContext } from '@storybook/vue3';
 import { TroisJSVuePlugin } from 'troisjs';
 import { createVuetify } from 'vuetify';
 import { VThemeProvider } from 'vuetify/components';
-
+import { theme } from '@portfolio/theme';
 import 'vuetify/styles';
 
 setup((app: App) => {
   app.use(TroisJSVuePlugin);
-  app.use(createVuetify());
+  app.use(
+    createVuetify({
+      theme: {
+        defaultTheme: 'default',
+        themes: {
+          default: theme,
+        },
+      },
+    })
+  );
 });
 
 const themeDecorator = (_: StoryObj, context: StoryContext) => ({
