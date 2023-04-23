@@ -23,5 +23,6 @@
   "eslint.run": "onSave",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+  "vue.features.codeActions.enable": false
 }

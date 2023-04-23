@@ -3,17 +3,28 @@ import { StoryObj, setup, StoryContext } from '@storybook/vue3';
 import { TroisJSVuePlugin } from 'troisjs';
 import { createVuetify } from 'vuetify';
 import { VThemeProvider } from 'vuetify/components';
+import { md3 } from 'vuetify/blueprints';
 import { theme } from '@portfolio/theme';
 import 'vuetify/styles';
+import { aliases, mdi } from 'vuetify/iconsets/mdi';
+import '@mdi/font/css/materialdesignicons.css'; // Ensure you are using css-loader
 
 setup((app: App) => {
   app.use(TroisJSVuePlugin);
   app.use(
     createVuetify({
+      blueprint: md3,
       theme: {
         defaultTheme: 'default',
         themes: {
           default: theme,
+        },
+      },
+      icons: {
+        defaultSet: 'mdi',
+        aliases,
+        sets: {
+          mdi,
         },
       },
     })

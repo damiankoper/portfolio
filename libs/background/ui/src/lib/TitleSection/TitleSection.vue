@@ -4,22 +4,27 @@ import { inject, onMounted, shallowRef } from 'vue';
 import { rendererKey } from '../Renderer.key';
 import TorusElement from '../Elements/TorusElement.vue';
 import { theme } from '@portfolio/theme';
-import SphereElement from '../Elements/SphereElement.vue';
+import { ref } from 'vue';
 
 const segments = 24;
 const position = new Vector3(0, 4, 0);
-const anchor = shallowRef(new Vector3());
-const radius = 0.75;
+const radius = 0.6;
 const renderer = inject(rendererKey);
 
+const titleContainer = shallowRef<HTMLDivElement>();
+const contentVisible = ref(false);
+
 const sphereCount = 100;
-const positions = new Array(sphereCount)
-  .fill(0)
-  .map(() => 2 * Math.random() - 1);
-const rotations = new Array(sphereCount)
-  .fill(0)
-  .map(() => 2 * Math.random() - 1);
-const sizes = new Array(sphereCount).fill(0).map(() => 2 * Math.random() - 1);
+
+function randArray() {
+  return new Array(sphereCount).fill(0).map(() => 2 * Math.random() - 1);
+}
+
+const positions = randArray();
+const arcs = randArray();
+const rotations = randArray();
+const sizes = randArray();
+const radii = randArray();
 
 onMounted(() => {
   renderer?.value?.onAfterRender(({ renderer }) => {
@@ -27,7 +32,16 @@ onMounted(() => {
     const vector = position.clone().project(tCamera.clone());
     vector.x = ((vector.x + 1) * renderer.size.width) / 2;
     vector.y = (-(vector.y - 1) * renderer.size.height) / 2;
-    anchor.value = vector;
+
+    const container = titleContainer.value;
+    if (container) {
+      container.style.transform = `
+        translate(
+          ${Math.max(0, vector.x + (3 - (vector.z - 0.96) * 100) * 48)}px,
+          calc(-50% - 40px + ${vector.y}px)
+        )
+      `;
+    }
   });
 });
 </script>
@@ -39,7 +53,7 @@ onMounted(() => {
     :radius="radius"
     :width-segments="segments"
   >
-    <BasicMaterial color="white" />
+    <BasicMaterial :color="theme.colors.primary" />
   </Sphere>
   <Sphere
     :height-segments="segments"
@@ -87,51 +101,86 @@ onMounted(() => {
     :tube="0.15"
   />
 
-  // TODO: change to torus
   <template v-for="(_, i) of Array(sphereCount)" :key="i">
-    <SphereElement
-      :center="new Vector3(0, 20 * positions[i] + 10, 0)"
+    <TorusElement
+      :arc="(Math.PI / 10) * arcs[i]"
       :color="theme.colors.outline"
-      :radius="0.25 + 0.1 * sizes[i]"
+      :position="new Vector3(0, 20 * positions[i] + 10, 0)"
+      :radius="26 + 10 * radii[i]"
       :rotation="Math.PI * rotations[i]"
-      :shift="20 + 7 * rotations[i]"
-      :speed="0.001 * rotations[i]"
+      :speed="0.0001 + 0.001 * arcs[i]"
+      :tube="0.25 + 0.1 * sizes[i]"
     />
   </template>
 
   <Teleport to="body">
     <div
-      class="ma-10"
+      ref="titleContainer"
+      class="ma-10 title-container text-secondary"
       style="position: fixed"
-      :style="{
-        top: `${anchor.y}px`,
-        left: `${Math.max(0, anchor.x + (3 - (anchor.z - 0.96) * 100) * 32)}px`,
-        transform: `translateY( calc(-50% - 40px)`,
-      }"
     >
       <div class="text-h1 font-weight-bold">Hi, I'm Damian</div>
       <div class="bottom-content">
-        <v-sheet class="text pa-6 surface" rounded="xl">
-          <!-- JavaScript & TypeScript enthusiast, not afraid of anything else! -->
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi nec
-          metus. Phasellus gravida semper nisi. Nam quam nunc, blandit vel,
-          luctus pulvinar, hendrerit id, lorem. Praesent metus tellus, elementum
-          eu, semper a, adipiscing nec, purus.
+        <v-sheet
+          v-if="contentVisible"
+          class="text pa-6 surface content"
+          rounded="xl"
+        >
+          <div class="mb-2">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi nec
+            metus. Phasellus gravida semper nisi. Nam quam nunc, blandit vel,
+            luctus pulvinar, hendrerit id, lorem. Praesent metus tellus,
+            elementum eu, semper a, adipiscing nec, purus.
+          </div>
+          <v-btn variant="tonal"> About me!</v-btn>
         </v-sheet>
+        <v-sheet v-else class="text pa-6 surface more-content" rounded="xl">
+          <div class="mb-2">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi nec
+            metus. Phasellus gravida semper nisi. Nam quam nunc, blandit vel,
+            luctus pulvinar, hendrerit id, lorem. Praesent metus tellus,
+            elementum eu, semper a, adipiscing nec, purus. metus. Phasellus
+            gravida semper nisi. Nam quam nunc, blandit vel, luctus pulvinar,
+            hendrerit id, lorem. Praesent metus tellus, elementum eu, semper a,
+            adipiscing nec, purus. drerit id, lorem. Praesent metus tellus,
+            elementum eu, semper a, adipiscing nec, purus. metus. Phasellus
+            gravida semper nisi. Nam quam nunc, blandit vel, luctus pulvinar,
+            hendrerit id, lorem. Praesent metus tel
+          </div>
+          <v-btn variant="tonal"> About me!</v-btn>
+        </v-sheet>
+        <!--  <div v-if="contentVisible">
+        </div>
+        <div v-else>
+          <img class="more-content" src="https://picsum.photos/636/454" />
+        </div> -->
       </div>
     </div>
   </Teleport>
 </template>
 
 <style scoped lang="scss">
-.bottom-content {
-  position: absolute;
-  top: calc(100% + 16px);
-  .text {
-    backdrop-filter: blur(12px);
+.title-container {
+  will-change: transform;
+  top: 0;
+  left: 0;
+  .content,
+  .more-content {
+    box-sizing: border-box;
+    img {
+      contain: layout;
+    }
   }
-  .surface {
-    background-color: rgba(var(--v-theme-primary), 0.07);
+
+  .bottom-content {
+    position: absolute;
+    top: calc(100% + 16px);
+    .text {
+      backdrop-filter: blur(12px);
+    }
+    .surface {
+      background-color: rgba(var(--v-theme-primary), 0.07);
+    }
   }
 }
 </style>

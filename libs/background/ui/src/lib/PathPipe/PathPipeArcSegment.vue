@@ -2,6 +2,7 @@
 import { PathPipeArcSegment } from './PathPipe.interface';
 import { computed } from 'vue';
 import { Vector3 } from 'three';
+import { BasicMaterial } from 'troisjs';
 const props = defineProps<{
   segment: PathPipeArcSegment;
   color: string;

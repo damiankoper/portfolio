@@ -6,6 +6,8 @@ import PathPipe from './PathPipe/PathPipe.vue';
 import { camPath } from './PathPipe/PathPipe.model';
 import TitleSection from './TitleSection/TitleSection.vue';
 import { rendererKey } from './Renderer.key';
+import { Vector3 } from 'three';
+import HeaderNavbar from './Nav/HeaderNavbar.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -49,6 +51,7 @@ onMounted(() => {
 
 <template>
   <div id="anchored"></div>
+  <HeaderNavbar />
   <div class="wrapper">
     <Renderer ref="renderer" alpha antialias :orbit-ctrl="{}" resize>
       <Camera :position="{ z: 100 }" />
