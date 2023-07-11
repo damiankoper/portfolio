@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { Camera, Renderer, Scene, RendererPublicInterface } from 'troisjs';
-
-import { onMounted, ref, watch, provide } from 'vue';
-import PathPipe from './PathPipe/PathPipe.vue';
-import { camPath } from './PathPipe/PathPipe.model';
-import TitleSection from './TitleSection/TitleSection.vue';
-import { rendererKey } from './Renderer.key';
-import { Vector3 } from 'three';
 import HeaderNavbar from './Nav/HeaderNavbar.vue';
+import { TresCanvas } from '@tresjs/core';
+import { OrbitControls } from '@tresjs/cientos';
+import { shallowRef } from 'vue';
+import { Vector3 } from 'three';
+import { watchEffect } from 'vue';
+import { watch } from 'vue';
+import { camPath } from './PathPipe/PathPipe.model';
 
 const props = withDefaults(
   defineProps<{
@@ -20,46 +19,43 @@ const props = withDefaults(
   }
 );
 
-const renderer = ref<RendererPublicInterface>();
-provide(rendererKey, renderer);
+const orbitCtrl = shallowRef<{ $el: typeof OrbitControls } | undefined>();
 
-watch(() => props.progress, updateCamera);
+watchEffect(() => console.log(orbitCtrl.value));
+watch(() => props.progress, updateCamera, { immediate: true });
 
 function updateCamera() {
-  const orbitCtrl = renderer.value?.three.cameraCtrl;
-  if (orbitCtrl) {
-    const target = camPath.getPoint(props.progress);
-    orbitCtrl.target.x = target.x;
-    orbitCtrl.target.y = target.y;
+  const target = camPath.getPoint(props.progress);
+  if (orbitCtrl.value) {
+    const orbitCtrlTarget = orbitCtrl.value.$el.target as Vector3;
+    orbitCtrlTarget.set(target.x, target.y, 0);
   }
 }
-
-onMounted(() => {
-  const orbitCtrl = renderer.value?.three.cameraCtrl;
-  if (orbitCtrl) {
-    orbitCtrl.enableZoom = false;
-    orbitCtrl.enableDamping = true;
-    orbitCtrl.maxPolarAngle = Math.PI / 2;
-    orbitCtrl.minPolarAngle = Math.PI / 2;
-    orbitCtrl.maxDistance = 10;
-    orbitCtrl.minDistance = 10;
-    orbitCtrl.enablePan = false;
-    updateCamera();
-  }
-});
 </script>
 
 <template>
-  <div id="anchored"></div>
   <HeaderNavbar />
   <div class="wrapper">
-    <Renderer ref="renderer" alpha antialias :orbit-ctrl="{}" resize>
-      <Camera :position="{ z: 100 }" />
-      <Scene>
-        <PathPipe />
-        <TitleSection />
-      </Scene>
-    </Renderer>
+    <TresCanvas window-size>
+      <TresPerspectiveCamera />
+      <OrbitControls
+        ref="orbitCtrl"
+        :damping-factor="scroll / 1000 + 0.01"
+        enable-damping
+        :enable-pan="false"
+        :enable-zoom="false"
+        :max-distance="10"
+        :max-polar-angle="Math.PI / 2"
+        :min-distance="10"
+        :min-polar-angle="Math.PI / 2"
+        :target="[...camPath.getPoint(props.progress).toArray(), 0]"
+      />
+
+      <TresMesh>
+        <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
+        <TresMeshBasicMaterial color="orange" />
+      </TresMesh>
+    </TresCanvas>
   </div>
 </template>
 

@@ -6,20 +6,14 @@
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/background/core/**/*.ts"
-        ]
+        "lintFilePatterns": ["libs/background/core/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/vite:test",
-      "outputs": [
-        "coverage/libs/background/core"
-      ],
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/libs/background/core"],
       "options": {
         "passWithNoTests": true,
         "reportsDirectory": "../../../coverage/libs/background/core"

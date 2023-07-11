@@ -6,7 +6,7 @@
   "tags": [],
   "targets": {
     "serve": {
-      "executor": "@nrwl/vite:dev-server",
+      "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "portfolio:build",
@@ -15,13 +15,13 @@
       "configurations": {}
     },
     "build": {
-      "executor": "@nrwl/vite:build",
+      "executor": "@nx/vite:build",
       "options": {
         "outputPath": "dist/apps/portfolio"
       }
     },
     "test": {
-      "executor": "@nrwl/vite:test",
+      "executor": "@nx/vite:test",
       "options": {
         "config": "vite.config.ts"
       },

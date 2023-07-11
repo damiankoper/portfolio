@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import rootMain from '../../../../.storybook/main';
 import libConfig from '../vite.config';
 import { mergeConfig, UserConfig } from 'vite';
-/* import vue from '@vitejs/plugin-vue';
- */
+import vue from '@vitejs/plugin-vue';
+
 export default {
   ...rootMain,
   stories: [
@@ -11,9 +10,9 @@ export default {
     '../src/lib/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   async viteFinal(config: UserConfig) {
-    /* if (config.plugins) {
+    if (config.plugins) {
       const pluginVueIndex = config.plugins.findIndex(
-        (c) => c.name === 'vite:vue'
+        (c:any) => c.name === 'vite:vue'
       );
       config.plugins[pluginVueIndex] = vue({
         template: {
@@ -23,7 +22,7 @@ export default {
           },
         },
       });
-    } */
-    return mergeConfig(config, libConfig);
+    }
+    return mergeConfig(config, libConfig as UserConfig);
   },
 };

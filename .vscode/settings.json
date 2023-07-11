@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "cientos",
     "nrwl",
     "Phong",
     "pinia",
@@ -24,5 +25,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "vue.features.codeActions.enable": false
+  "vue.features.codeActions.enable": false,
+  "vue.codeActions.enabled": false
 }
