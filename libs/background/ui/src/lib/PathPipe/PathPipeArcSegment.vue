@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { PathPipeArcSegment } from './PathPipe.interface';
-import { computed } from 'vue';
-import { Vector3 } from 'three';
-import { BasicMaterial } from 'troisjs';
+import { Vector3, Euler } from 'three';
+import { Torus } from '@tresjs/cientos';
 const props = defineProps<{
   segment: PathPipeArcSegment;
   color: string;
 }>();
 
 const segments = 24;
-const position = computed(() => {
+
+function getPosition() {
   const position = props.segment.start.clone();
   switch (props.segment.variant) {
     case 'top-right':
@@ -26,35 +26,28 @@ const position = computed(() => {
       break;
   }
   return position;
-});
+}
 
-const rotation = computed(() => {
+function getRotation() {
   switch (props.segment.variant) {
     case 'top-right':
-      return { z: Math.PI };
+      return new Euler(0, 0, Math.PI);
     case 'top-left':
-      return { z: (Math.PI / 2) * 3 };
+      return new Euler(0, 0, (Math.PI / 2) * 3);
     case 'left-bottom':
-      return {};
+      return new Euler();
     default:
     case 'right-bottom':
-      return { z: Math.PI / 2 };
+      return new Euler(0, 0, Math.PI / 2);
   }
-});
+}
 </script>
 
 <template>
   <Torus
-    :arc="Math.PI / 2"
-    :position="position"
-    :radial-segments="segments"
-    :radius="segment.radius"
-    :rotation="rotation"
-    :tube="segment.width / 2"
-    :tubular-segments="segments"
-  >
-    <BasicMaterial :color="color" />
-  </Torus>
+    :args="[segment.radius, segment.width / 2, segments, segments, Math.PI / 2]"
+    :color="color"
+    :position="getPosition()"
+    :rotation="getRotation()"
+  />
 </template>
-
-<style scoped></style>

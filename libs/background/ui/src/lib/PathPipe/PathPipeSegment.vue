@@ -2,7 +2,7 @@
 import { PathPipeSegmentType } from './PathPipe.interface';
 import { LineCurve3 } from 'three';
 import PathPipeArcSegment from './PathPipeArcSegment.vue';
-import { BasicMaterial, Sphere, Tube } from 'troisjs';
+import { Sphere, Tube } from '@tresjs/cientos';
 
 defineProps<{
   segment: PathPipeSegmentType;
@@ -15,23 +15,21 @@ const segments = 24;
 <template>
   <template v-if="segment.type === 'cup'">
     <Sphere
-      :height-segments="segments"
+      :args="[segment.width / 2, segments, segments]"
+      :color="color"
       :position="segment.start"
-      :radius="segment.width / 2"
-      :width-segments="segments"
-    >
-      <BasicMaterial :color="color" />
-    </Sphere>
+    />
   </template>
   <template v-if="segment.type === 'line'">
     <Tube
-      :path="new LineCurve3(segment.start, segment.end)"
-      :radial-segments="segments"
-      :radius="segment.width / 2"
-      :tubular-segments="1"
-    >
-      <BasicMaterial :color="color" />
-    </Tube>
+      :args="[
+        new LineCurve3(segment.start, segment.end),
+        1,
+        segment.width / 2,
+        segments,
+      ]"
+      :color="color"
+    />
   </template>
   <template v-if="segment.type === 'arc'">
     <PathPipeArcSegment :color="color" :segment="segment" />

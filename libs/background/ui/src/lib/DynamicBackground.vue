@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import HeaderNavbar from './Nav/HeaderNavbar.vue';
+import TitleSectionScene from './TitleSection/TitleSectionScene.vue';
 import { TresCanvas } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import { shallowRef } from 'vue';
 import { Vector3 } from 'three';
-import { watchEffect } from 'vue';
 import { watch } from 'vue';
 import { camPath } from './PathPipe/PathPipe.model';
+import PathPipe from './PathPipe/PathPipe.vue';
+import TitleSection from './TitleSection/TitleSection.vue';
 
 const props = withDefaults(
   defineProps<{
@@ -16,12 +18,14 @@ const props = withDefaults(
   {
     progress: 0,
     scroll: 0,
-  }
+  },
 );
 
-const orbitCtrl = shallowRef<{ $el: typeof OrbitControls } | undefined>();
+const camDistance = 10;
 
-watchEffect(() => console.log(orbitCtrl.value));
+const orbitCtrl = shallowRef<{ $el: typeof OrbitControls } | undefined>();
+const titleAnchors = shallowRef({ header: new Vector3() });
+
 watch(() => props.progress, updateCamera, { immediate: true });
 
 function updateCamera() {
@@ -36,27 +40,25 @@ function updateCamera() {
 <template>
   <HeaderNavbar />
   <div class="wrapper">
-    <TresCanvas window-size>
-      <TresPerspectiveCamera />
+    <TresCanvas clear-color="#ffffff" window-size>
+      <TresPerspectiveCamera :position="[10, 0, 100]" />
       <OrbitControls
         ref="orbitCtrl"
-        :damping-factor="scroll / 1000 + 0.01"
+        :damping-factor="0.1"
         enable-damping
         :enable-pan="false"
         :enable-zoom="false"
-        :max-distance="10"
+        :max-distance="camDistance"
         :max-polar-angle="Math.PI / 2"
-        :min-distance="10"
+        :min-distance="camDistance"
         :min-polar-angle="Math.PI / 2"
         :target="[...camPath.getPoint(props.progress).toArray(), 0]"
       />
-
-      <TresMesh>
-        <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
-        <TresMeshBasicMaterial color="orange" />
-      </TresMesh>
+      <PathPipe />
+      <TitleSectionScene @update:anchors="titleAnchors = $event" />
     </TresCanvas>
   </div>
+  <TitleSection :anchors="titleAnchors" />
 </template>
 
 <style lang="scss">
