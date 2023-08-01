@@ -41,7 +41,7 @@ function updateCamera() {
   <HeaderNavbar />
   <div class="wrapper">
     <TresCanvas clear-color="#ffffff" window-size>
-      <TresPerspectiveCamera :position="[10, 0, 100]" />
+      <TresPerspectiveCamera :position="[20, 0, 50]" />
       <OrbitControls
         ref="orbitCtrl"
         :damping-factor="0.1"

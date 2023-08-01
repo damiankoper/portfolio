@@ -7,34 +7,51 @@ const props = defineProps<{
 }>();
 
 const headerTransform = computed(() => {
+  const y = props.anchors.header.y;
   const z = 0.995 - props.anchors.header.z;
-  const x = props.anchors.header.x + z * 5000;
+  const x = Math.max(0, props.anchors.header.x + z * 5000);
   return `translate(
-      ${x}px,
-      calc(-50% - 40px + ${props.anchors.header.y}px)
+      ${Math.round(x)}px,
+      calc(-50% - 40px + ${Math.round(y)}px)
     )
   `;
 });
 </script>
 
 <template>
-  <div></div>
   <Teleport to="body">
     <div
       class="ma-10 title-container text-secondary"
-      style="position: fixed"
       :style="{ transform: headerTransform }"
     >
       <div class="text-h1 font-weight-bold">Hi, I'm Damian</div>
       <div class="bottom-content">
-        <v-sheet class="text pa-6 surface content" rounded="xl">
+        <v-sheet
+          class="text pa-6 surface content d-flex flex-column align-end"
+          :max-width="800"
+          rounded="xl"
+        >
           <div class="mb-2">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi nec
-            metus. Phasellus gravida semper nisi. Nam quam nunc, blandit vel,
-            luctus pulvinar, hendrerit id, lorem. Praesent metus tellus,
-            elementum eu, semper a, adipiscing nec, purus.
+            <p class="mb-2">
+              I'm a software engineer based in Wrocław, Poland. I would consider
+              myself as a&nbsp;<span class="text-primary font-weight-bold"
+                >Web Developer
+              </span>
+              currently working as
+              <span class="text-primary font-weight-bold">
+                Technical Leader
+              </span>
+              and
+              <span class="text-primary font-weight-bold">Team Leader</span>.
+              I&nbsp;work in a great&nbsp;team&nbsp;of&nbsp;6 on a production
+              planning and scheduling SaaS software.
+            </p>
+            <p class="mb-2">
+              In my free time, besides coding, I like to brew beer&nbsp;🍺 and
+              swim on my SUP board&nbsp;🏄.
+            </p>
           </div>
-          <v-btn variant="tonal"> About me!</v-btn>
+          <v-btn variant="tonal"> More about me!</v-btn>
         </v-sheet>
 
         <!--  <div v-if="contentVisible">
@@ -49,16 +66,10 @@ const headerTransform = computed(() => {
 
 <style scoped lang="scss">
 .title-container {
+  position: fixed;
   will-change: transform;
   top: 0;
   left: 0;
-  .content,
-  .more-content {
-    box-sizing: border-box;
-    img {
-      contain: layout;
-    }
-  }
 
   .bottom-content {
     position: absolute;
@@ -70,7 +81,7 @@ const headerTransform = computed(() => {
       background-color: color-mix(
         in srgb,
         rgba(var(--v-theme-primary)) 7%,
-        white 50%
+        white 0%
       );
     }
   }
