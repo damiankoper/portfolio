@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Vector3 } from 'three';
 import { computed } from 'vue';
+import supUrl from '../assets/sup.png';
+import yeastUrl from '../assets/yeast.png';
 
 const props = defineProps<{
   anchors: { header: Vector3 };
@@ -47,18 +49,41 @@ const headerTransform = computed(() => {
               planning and scheduling SaaS software.
             </p>
             <p class="mb-2">
-              In my free time, besides coding, I like to brew beer&nbsp;🍺 and
-              swim on my SUP board&nbsp;🏄.
+              In my free time, besides coding, I like to
+              <v-menu
+                :close-delay="0"
+                location="right center"
+                :offset="8"
+                :open-delay="0"
+                open-on-hover
+              >
+                <template #activator="{ props: activatorProps }">
+                  <a v-bind="activatorProps" class="underline">brew beer</a>
+                </template>
+                <v-sheet rounded="xl">
+                  <v-img :src="yeastUrl" :width="300"></v-img>
+                </v-sheet>
+              </v-menu>
+              and
+              <v-menu
+                :close-delay="0"
+                location="right center"
+                :offset="8"
+                :open-delay="0"
+                open-on-hover
+              >
+                <template #activator="{ props: activatorProps }">
+                  <a v-bind="activatorProps" class="underline">swim</a>
+                </template>
+                <v-sheet rounded="xl">
+                  <v-img :src="supUrl" :width="300"></v-img>
+                </v-sheet>
+              </v-menu>
+              on my SUP board.
             </p>
           </div>
           <v-btn variant="tonal"> More about me!</v-btn>
         </v-sheet>
-
-        <!--  <div v-if="contentVisible">
-        </div>
-        <div v-else>
-          <img class="more-content" src="https://picsum.photos/636/454" />
-        </div> -->
       </div>
     </div>
   </Teleport>
@@ -85,5 +110,11 @@ const headerTransform = computed(() => {
       );
     }
   }
+}
+
+.underline {
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: rgb(var(--v-theme-primary)) 2px dotted;
 }
 </style>

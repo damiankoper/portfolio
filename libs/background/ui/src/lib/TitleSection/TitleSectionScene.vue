@@ -4,6 +4,7 @@ import { theme } from '@portfolio/theme';
 import { Sphere } from '@tresjs/cientos';
 import { useRenderLoop, useTresContext } from '@tresjs/core';
 import TorusElement from '../Elements/TorusElement.vue';
+import { randArray } from '../utils/number.utils';
 
 const segments = 24;
 const position = new Vector3(0, 4, 0);
@@ -13,15 +14,11 @@ const { camera, renderer } = useTresContext();
 
 const sphereCount = 100;
 
-function randArray() {
-  return new Array(sphereCount).fill(0).map(() => 2 * Math.random() - 1);
-}
-
-const positions = randArray();
-const arcs = randArray();
-const rotations = randArray();
-const sizes = randArray();
-const radii = randArray();
+const positions = randArray(sphereCount);
+const arcs = randArray(sphereCount);
+const rotations = randArray(sphereCount);
+const sizes = randArray(sphereCount);
+const radii = randArray(sphereCount);
 
 const emit = defineEmits<{
   (e: 'update:anchors', p: { header: Vector3 }): void;

@@ -9,7 +9,8 @@
     "troisjs",
     "unplugin",
     "Vite",
-    "vuetify"
+    "vuetify",
+    "Wrocław"
   ],
   "eslint.enable": true,
   "eslint.validate": [
