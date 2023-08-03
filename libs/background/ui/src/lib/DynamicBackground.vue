@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import HeaderNavbar from './Nav/HeaderNavbar.vue';
 import TitleSectionScene from './TitleSection/TitleSectionScene.vue';
-import { TresCanvas } from '@tresjs/core';
+import { TresCanvas, useRenderLoop } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos';
 import { shallowRef } from 'vue';
-import { Vector3 } from 'three';
+import { PerspectiveCamera, Vector3 } from 'three';
 import { watch } from 'vue';
 import { camPath } from './PathPipe/PathPipe.model';
 import PathPipe from './PathPipe/PathPipe.vue';
 import TitleSection from './TitleSection/TitleSection.vue';
+import { ref } from 'vue';
 
 const props = withDefaults(
   defineProps<{
@@ -35,13 +36,27 @@ function updateCamera() {
     orbitCtrlTarget.set(target.x, target.y, 0);
   }
 }
+
+const { onLoop } = useRenderLoop();
+const yRotation = ref(0);
+const camera = shallowRef<PerspectiveCamera | null>(null);
+onLoop(() => {
+  if (camera.value && orbitCtrl.value?.$el) {
+    const el = orbitCtrl.value.$el as unknown as {
+      getAzimuthalAngle: () => number;
+    };
+    const angle = el.getAzimuthalAngle();
+
+    yRotation.value = angle;
+  }
+});
 </script>
 
 <template>
   <HeaderNavbar />
   <div class="wrapper">
     <TresCanvas clear-color="#ffffff" window-size>
-      <TresPerspectiveCamera :position="[20, 0, 50]" />
+      <TresPerspectiveCamera ref="camera" :position="[20, 0, 50]" />
       <OrbitControls
         ref="orbitCtrl"
         :damping-factor="0.1"
@@ -58,7 +73,7 @@ function updateCamera() {
       <TitleSectionScene @update:anchors="titleAnchors = $event" />
     </TresCanvas>
   </div>
-  <TitleSection :anchors="titleAnchors" />
+  <TitleSection :anchors="titleAnchors" :y-rotation="yRotation" />
 </template>
 
 <style lang="scss">
