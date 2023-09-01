@@ -1,0 +1,23 @@
+<script setup lang="ts"></script>
+
+<template>
+  <div class="tips ma-6">
+    <span class="mr-4">
+      <v-icon color="primary" icon="mdi-mouse"></v-icon>
+      <v-icon color="primary" icon="mdi-arrow-left-right"></v-icon>
+    </span>
+    <span>
+      <v-icon color="primary" icon="mdi-mouse"></v-icon>
+      <v-icon color="primary" icon="mdi-arrow-up-down"></v-icon>
+    </span>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.tips {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0.3;
+}
+</style>

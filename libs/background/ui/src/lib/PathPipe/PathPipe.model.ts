@@ -40,9 +40,23 @@ export const pathPipe = [
     width,
     end: new Vector3(4, -10, 0),
   },
+
+  {
+    type: 'arc',
+    start: new Vector3(4, -10, 0),
+    width,
+    radius: 1,
+    variant: 'top-right',
+  },
+  {
+    type: 'line',
+    start: new Vector3(6, -12, 0),
+    width,
+    end: new Vector3(15, -12, 0),
+  },
   {
     type: 'cup',
-    start: new Vector3(4, -10, 0),
+    start: new Vector3(15, -12, 0),
     width,
   },
 ] satisfies PathPipeSegmentType[];
@@ -50,6 +64,6 @@ export const pathPipe = [
 export const camPath: Curve<Vector2> = new SplineCurve([
   new Vector2(6, 2.5),
   new Vector2(6, -1),
-  new Vector2(4, -8),
-  new Vector2(4, -15),
+  new Vector2(4, -7),
+  new Vector2(4, -10),
 ]);

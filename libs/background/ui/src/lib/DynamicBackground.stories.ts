@@ -17,11 +17,10 @@ export const Base: Story = {
     components: { DynamicBackground },
     template: `
       <div style="height:400vh;padding:0px">
-        <DynamicBackground :progress="progress" :scroll="scroll"/>
+        <DynamicBackground :progress="progress" />
       </div>
     `,
     setup() {
-      const scroll = ref(0);
       const progress = ref(0);
       onMounted(() => {
         window.addEventListener('scroll', () => {
@@ -30,10 +29,9 @@ export const Base: Story = {
           const bodyRect = document.body.getBoundingClientRect();
 
           progress.value = -scrollY / (height - bodyRect.height);
-          scroll.value = scrollY;
         });
       });
-      return { scroll, progress };
+      return { progress };
     },
   }),
 };

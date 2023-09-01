@@ -1,0 +1,19 @@
+.surface-white {
+  backdrop-filter: blur(12px);
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--v-theme-primary)) 4%,
+    white 72%
+  );
+  color: rgb(var(--v-theme-on-primary-container))
+}
+
+.surface {
+  backdrop-filter: blur(12px);
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--v-theme-primary)) 7%,
+    white 14%
+  );
+  color: rgb(var(--v-theme-on-primary-container))
+}

@@ -3,12 +3,12 @@ import { PerspectiveCamera, Vector3 } from 'three';
 import { theme } from '@portfolio/theme';
 import { Sphere } from '@tresjs/cientos';
 import { useRenderLoop, useTresContext } from '@tresjs/core';
-import TorusElement from '../Elements/TorusElement.vue';
-import { randArray } from '../utils/number.utils';
+import TorusElement from '../../Elements/TorusElement.vue';
+import { randArray } from '../../utils/number.utils';
 
 const segments = 24;
-const position = new Vector3(0, 4, 0);
-const radius = 0.6;
+const position = new Vector3(4, -6, 0);
+const radius = 1.2;
 const { onAfterLoop } = useRenderLoop();
 const { camera, renderer } = useTresContext();
 
@@ -47,45 +47,11 @@ onAfterLoop(() => {
     />
   </Sphere>
 
-  <TorusElement
-    :arc="Math.PI"
-    :color="theme.colors.secondary"
-    :position="new Vector3(0, 1.25, 0)"
-    :radius="1"
-    :speed="0.001"
-    :tube="0.25"
-  />
-  <TorusElement
-    :arc="Math.PI"
-    :color="theme.colors.secondary"
-    :position="new Vector3(0, 0.25, 0)"
-    :radius="2"
-    :speed="-0.002"
-    :tube="0.25"
-  />
-  <TorusElement
-    :arc="Math.PI"
-    :color="theme.colors.secondary"
-    :position="new Vector3(0, -0.75, 0)"
-    :radius="1.5"
-    :speed="-0.001"
-    :tube="0.25"
-  />
-  <TorusElement
-    :arc="Math.PI / 8"
-    :color="theme.colors.secondary"
-    :position="new Vector3(0, 0.25, 0)"
-    :radius="1"
-    :rotation="0"
-    :speed="0.001"
-    :tube="0.15"
-  />
-
   <template v-for="(_, i) of Array(sphereCount)" :key="i">
     <TorusElement
       :arc="(Math.PI / 10) * arcs[i]"
       :color="theme.colors.outlineVariant"
-      :position="new Vector3(0, 20 * positions[i] + 10, 0)"
+      :position="new Vector3(0, 50 * positions[i] + 10, 0)"
       :radius="26 + 13 * radii[i]"
       :rotation="Math.PI * rotations[i]"
       :speed="0.0001 + 0.001 * arcs[i]"
