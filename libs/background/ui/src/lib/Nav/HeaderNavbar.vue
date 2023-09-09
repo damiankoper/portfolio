@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <nav>
+  <v-app-bar>
     <v-container class="py-2">
       <v-row align="center" dense justify="space-between">
         <v-col class="text-overline font-weight-bold text-secondary">
@@ -19,14 +19,11 @@
         </v-col>
       </v-row>
     </v-container>
-  </nav>
+  </v-app-bar>
 </template>
 
 <style scoped>
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
+.v-app-bar {
   width: 100vw;
   z-index: 1;
   backdrop-filter: blur(24px);

@@ -62,8 +62,6 @@ export const pathPipe = [
 ] satisfies PathPipeSegmentType[];
 
 export const camPath: Curve<Vector2> = new SplineCurve([
-  new Vector2(6, 2.5),
-  new Vector2(6, -1),
-  new Vector2(4, -7),
-  new Vector2(4, -10),
+  new Vector2(0, 0),
+  new Vector2(0, -10),
 ]);

@@ -15,17 +15,16 @@ import { azimuthKey } from './utils/symbols';
 import { provide } from 'vue';
 import ProjectsSectionScene from './Sections/ProjectsSection/ProjectsSectionScene.vue';
 import ProjectsSection from './Sections/ProjectsSection/ProjectsSection.vue';
+import { onMounted } from 'vue';
 
 const props = withDefaults(
   defineProps<{
     progress: number;
   }>(),
-  {
-    progress: 0,
-  },
+  { progress: 0 },
 );
 
-const camDistance = 10;
+const camDistance = 4;
 
 const orbitCtrl = shallowRef<{ $el: typeof OrbitControls } | undefined>();
 const titleAnchors = shallowRef({ header: new Vector3() });
@@ -55,41 +54,40 @@ onLoop(() => {
     azimuth.value = (angle * 180) / Math.PI + 180;
   }
 });
+const main = shallowRef();
 </script>
 
 <template>
-  <div class="wrapper">
-    <TresCanvas clear-color="#ffffff" window-size>
-      <TresPerspectiveCamera ref="camera" :position="[50, 0, 50]" />
-      <OrbitControls
-        ref="orbitCtrl"
-        :damping-factor="0.1"
-        enable-damping
-        :enable-pan="false"
-        :enable-zoom="false"
-        :max-distance="camDistance"
-        :max-polar-angle="Math.PI / 2"
-        :min-distance="camDistance"
-        :min-polar-angle="Math.PI / 2"
-        :target="[...camPath.getPoint(props.progress).toArray(), 0]"
-      />
-      <PathPipe />
-      <TitleSectionScene @update:anchors="titleAnchors = $event" />
-      <ProjectsSectionScene @update:anchors="projectsAnchors = $event" />
-    </TresCanvas>
-  </div>
-  <TitleSection :anchors="titleAnchors" />
-  <ProjectsSection :anchors="projectsAnchors" />
-  <NavTips />
-  <HeaderNavbar />
+  <v-app style="background: none">
+    <NavTips />
+    <HeaderNavbar />
+    <v-main ref="main">
+      <v-container>
+        <TitleSection :anchors="titleAnchors" />
+      </v-container>
+    </v-main>
+  </v-app>
+
+  <TresCanvas clear-color="#ffffff" style="z-index: -1" window-size>
+    <TresPerspectiveCamera ref="camera" :position="[0, 0, 1]" />
+    <OrbitControls
+      ref="orbitCtrl"
+      :damping-factor="0.1"
+      :dom-element="main.$el"
+      enable-damping
+      :enable-pan="false"
+      :enable-zoom="false"
+      :max-distance="camDistance"
+      :max-polar-angle="Math.PI / 2"
+      :min-distance="camDistance"
+      :min-polar-angle="Math.PI / 2"
+      :target="[...camPath.getPoint(props.progress).toArray(), 0]"
+    />
+    <!-- <PathPipe /> -->
+    <TitleSectionScene @update:anchors="titleAnchors = $event" />
+    <!-- <ProjectsSectionScene @update:anchors="projectsAnchors = $event" /> -->
+  </TresCanvas>
+  <!-- <ProjectsSection :anchors="projectsAnchors" /> -->
 </template>
 
-<style lang="scss">
-.wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
-</style>
+<style lang="scss"></style>

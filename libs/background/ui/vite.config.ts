@@ -4,8 +4,5 @@ import viteTsConfigPaths from 'vite-tsconfig-paths';
 import vuetify from 'vite-plugin-vuetify';
 
 export default defineConfig({
-  plugins: [
-    viteTsConfigPaths({ root: '../../../' }),
-    vuetify(),
-  ],
+  plugins: [viteTsConfigPaths({ root: '../../../' }), vuetify()],
 });

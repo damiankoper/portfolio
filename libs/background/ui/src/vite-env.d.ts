@@ -7,3 +7,13 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
+
+declare module '*.vert' {
+  const vert: string;
+  export default vert;
+}
+
+declare module '*.frag' {
+  const frag: string;
+  export default frag;
+}

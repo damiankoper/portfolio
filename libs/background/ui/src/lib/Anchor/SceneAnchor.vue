@@ -12,7 +12,7 @@ const props = withDefaults(
     location: [LocationX, LocationY];
     azimuthFrom?: number;
     azimuthTo?: number;
-    offset: [number, number];
+    offset?: [number, number];
     zFix?: number;
   }>(),
   {
@@ -40,17 +40,18 @@ function getLocationTransform(origin: LocationX | LocationY) {
 
 const transform = computed(() => {
   const y = props.anchor.y;
-  const z = 0.995 - props.anchor.z;
-  const x = Math.max(0, props.anchor.x + z * props.zFix);
+  const x = Math.max(0, props.anchor.x);
   const xOffset = props.offset[0] ? `+ ${props.offset[0]}px` : '';
   const yOffset = props.offset[1] ? `+ ${props.offset[1]}px` : '';
   const xLocation = getLocationTransform(props.location[0]);
   const yLocation = getLocationTransform(props.location[1]);
-  return `translate(
+  return {
+    maxWidth: '100%',
+    transform: `translate(
       calc(${xLocation} + ${Math.round(x)}px ${xOffset}),
       calc(${yLocation} + ${Math.round(y)}px ${yOffset})
-    )
-  `;
+    )`,
+  };
 });
 
 const visible = computed(() =>
@@ -65,7 +66,7 @@ const visible = computed(() =>
     <div
       class="container"
       v-bind="$attrs"
-      :style="{ transform, transformOrigin: location }"
+      :style="{ ...transform, transformOrigin: location }"
     >
       <Transition>
         <div v-show="visible" style="position: relative">

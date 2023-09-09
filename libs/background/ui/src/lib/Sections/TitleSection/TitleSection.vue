@@ -3,36 +3,39 @@ import { Vector3 } from 'three';
 import SceneAnchor from '../../Anchor/SceneAnchor.vue';
 import supUrl from './assets/sup.png';
 import yeastUrl from './assets/yeast.png';
-import { useWindowSize } from '@vueuse/core';
 
 defineProps<{
   anchors: { header: Vector3 };
 }>();
-
-const { height } = useWindowSize();
 </script>
 
 <template>
-  <SceneAnchor
+  <!--   <SceneAnchor
     :anchor="anchors.header"
-    :azimuth-from="90"
-    :azimuth-to="300"
-    class="ma-10"
-    :location="['right', 'center']"
-    :offset="[(-2160 + height) * 0.05 + 40, -40]"
+    :azimuth-from="0"
+    :azimuth-to="360"
+    class="ma-5"
+    :location="['right', 'bottom']"
+    :offset="[25, 25]"
     style="color: rgb(var(--v-theme-on-primary-container))"
     :z-fix="5000"
   >
-    <template #anchor>
-      <div class="text-h1 font-weight-bold">Hi, I'm Damian</div>
-    </template>
+    <template #anchor> </template>
+  </SceneAnchor> -->
+
+  <v-sheet
+    class="d-flex align-sm-center align-start mt-sm-n16"
+    color="transparent"
+    height="100vh"
+  >
     <v-sheet
       class="text mt-2 pa-6 surface content d-flex flex-column align-end"
       :max-width="700"
       rounded="xl"
     >
       <div class="mb-2">
-        <p class="mb-2">
+        <div class="text-md-h1 text-h2 font-weight-bold">Hi, I'm Damian</div>
+        <p class="my-2">
           I'm a software engineer based in Wrocław, Poland. I would consider
           myself as a full stack&nbsp;<span
             class="text-primary font-weight-bold"
@@ -52,6 +55,7 @@ const { height } = useWindowSize();
             location="right center"
             :offset="8"
             :open-delay="0"
+            open-on-click
             open-on-hover
           >
             <template #activator="{ props: activatorProps }">
@@ -67,6 +71,7 @@ const { height } = useWindowSize();
             location="right center"
             :offset="8"
             :open-delay="0"
+            open-on-click
             open-on-hover
           >
             <template #activator="{ props: activatorProps }">
@@ -84,7 +89,7 @@ const { height } = useWindowSize();
         <v-btn variant="tonal"> Projects</v-btn>
       </div>
     </v-sheet>
-  </SceneAnchor>
+  </v-sheet>
 </template>
 
 <style scoped lang="scss">
