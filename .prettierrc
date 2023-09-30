@@ -1,3 +1,19 @@
 {
-  "singleQuote": true
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "singleQuote": true,
+  "htmlWhitespaceSensitivity": "strict",
+
+  "trailingComma": "all",
+  "importOrder": [
+    "<BUILTIN_MODULES>",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^[./]",
+    "",
+    "^[#~]",
+    ""
+  ],
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+  "importOrderTypeScriptVersion": "5.0.0"
 }

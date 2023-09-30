@@ -1,0 +1,43 @@
+<script setup lang="ts">
+import { ScrollControls } from '@tresjs/cientos';
+import { TresCanvas } from '@tresjs/core';
+import { useDisplay, useTheme } from 'vuetify';
+
+import MoreToComeSection from '../Section/MoreToComeSection/MoreToComeSection.vue';
+import TitleSection from '../Section/TitleSection/TitleSection.vue';
+import TitleSectionScene from '../Section/TitleSection/TitleSectionScene.vue';
+import HeaderNavbar from './Nav/HeaderNavbar.vue';
+import NavTips from './Nav/NavTips.vue';
+
+const theme = useTheme();
+const { smAndUp } = useDisplay();
+</script>
+
+<template>
+  <ClientOnly>
+    <TresCanvas clear-color="#ffffff">
+      <TresPerspectiveCamera ref="camera" :position="[0, 0, 5]" />
+      <TitleSectionScene
+        :color="theme.current.value.colors.primary"
+        :sm-and-up="smAndUp"
+      />
+      <ScrollControls :distance="5" html-scroll :smooth-scroll="0.05" />
+    </TresCanvas>
+  </ClientOnly>
+  <v-app style="background: none">
+    <HeaderNavbar />
+    <v-main ref="main">
+      <v-container>
+        <TitleSection />
+        <MoreToComeSection />
+      </v-container>
+    </v-main>
+    <NavTips />
+  </v-app>
+</template>
+
+<style scoped lang="scss">
+.v-main {
+  --v-layout-top: 64px !important;
+}
+</style>
