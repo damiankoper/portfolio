@@ -5,9 +5,10 @@ import yeastUrl from './assets/yeast.png';
 
 <template>
   <v-sheet
+    id="title"
     class="d-flex align-sm-center align-start mt-sm-n16"
     color="transparent"
-    height="calc(100dvh - 64px)"
+    height="100lvh"
   >
     <v-sheet
       class="text mt-2 pa-6 surface content d-flex flex-column align-end"
