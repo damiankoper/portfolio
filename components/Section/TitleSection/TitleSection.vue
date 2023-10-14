@@ -39,7 +39,7 @@ import yeastUrl from './assets/yeast.png';
             open-on-hover
           >
             <template #activator="{ props: activatorProps }">
-              <a v-bind="activatorProps" class="underline">brew beer</a>
+              <span v-bind="activatorProps" class="underline">brew beer</span>
             </template>
             <v-sheet rounded="xl">
               <v-img :src="yeastUrl" :width="300" />
@@ -55,7 +55,7 @@ import yeastUrl from './assets/yeast.png';
             open-on-hover
           >
             <template #activator="{ props: activatorProps }">
-              <a v-bind="activatorProps" class="underline">swim</a>
+              <span v-bind="activatorProps" class="underline">swim</span>
             </template>
             <v-sheet rounded="xl">
               <v-img :src="supUrl" :width="300" />
@@ -66,8 +66,6 @@ import yeastUrl from './assets/yeast.png';
       </div>
       <div class="d-flex" style="gap: 8px">
         <v-btn color="secondary" disabled variant="tonal"> More to come </v-btn>
-        <!--         <v-btn variant="tonal"> Projects </v-btn>
- -->
       </div>
     </v-sheet>
   </v-sheet>

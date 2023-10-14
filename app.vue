@@ -7,6 +7,14 @@ import NavFooter from './components/Nav/NavFooter.vue';
 import NavTips from './components/Nav/NavTips.vue';
 import MoreToComeSection from './components/Section/MoreToComeSection/MoreToComeSection.vue';
 import TitleSection from './components/Section/TitleSection/TitleSection.vue';
+
+useSeoMeta({
+  title: 'Damian Koper',
+  ogTitle: 'Damian Koper',
+  description: "Damian Koper's portfolio.",
+  ogDescription: "Damian Koper's portfolio.",
+  ogImage: 'https://example.com/image.png',
+});
 </script>
 
 <template>

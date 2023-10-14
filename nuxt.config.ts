@@ -1,12 +1,18 @@
 import { md3 } from 'vuetify/blueprints';
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  app: {
+    head: {
+      htmlAttrs: { lang: 'en' },
+    },
+  },
+
   modules: [
     '@tresjs/nuxt',
     '@nuxtjs/eslint-module',
     '@invictus.codes/nuxt-vuetify',
+    'unplugin-icons/nuxt',
   ],
   typescript: {
     shim: false,
@@ -15,6 +21,7 @@ export default defineNuxtConfig({
   vuetify: {
     moduleOptions: {
       treeshaking: true,
+      useIconCDN: false,
     },
     vuetifyOptions: {
       blueprint: md3,
@@ -32,13 +39,6 @@ export default defineNuxtConfig({
               outlineVariant: '#EDDDE1',
             },
           },
-        },
-      },
-      icons: {
-        defaultSet: 'mdi',
-        aliases,
-        sets: {
-          mdi,
         },
       },
     },
