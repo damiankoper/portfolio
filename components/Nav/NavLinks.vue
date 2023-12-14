@@ -16,7 +16,7 @@ import IconLinkedin from '~icons/mdi/linkedin';
   />
   <v-btn
     aria-label="Go to Linkedin profile"
-    href="https://www.linkedin.com/in/damian-koper-b76789151/"
+    href="https://www.linkedin.com/in/damiankoper/"
     :icon="IconLinkedin"
     target="_blanc"
     variant="plain"
