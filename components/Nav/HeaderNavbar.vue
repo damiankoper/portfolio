@@ -3,6 +3,8 @@ import { useDisplay } from 'vuetify';
 
 import NavLinks from './NavLinks.vue';
 
+import IconMenu from '~icons/mdi/menu';
+
 const extended = ref(false);
 const { xs } = useDisplay();
 </script>
@@ -14,7 +16,7 @@ const { xs } = useDisplay();
         <v-col class="font-weight-bold text-button">
           <v-btn
             class="me-2 d-inline-flex d-sm-none"
-            icon="mdi-menu"
+            :icon="IconMenu"
             @click="extended = !extended"
           />
           Damian Koper

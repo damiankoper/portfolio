@@ -13,7 +13,7 @@ useSeoMeta({
   ogTitle: 'Damian Koper',
   description: "Damian Koper's portfolio.",
   ogDescription: "Damian Koper's portfolio.",
-  ogImage: 'https://example.com/image.png',
+  // ogImage: 'https://example.com/image.png',
 });
 </script>
 
