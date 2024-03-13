@@ -12,7 +12,7 @@ import yeastUrl from './assets/yeast.png';
   >
     <v-sheet
       class="text mt-2 pa-6 surface content d-flex flex-column align-end"
-      :max-width="700"
+      :max-width="710"
       rounded="xl"
     >
       <div class="mb-2">
@@ -20,13 +20,26 @@ import yeastUrl from './assets/yeast.png';
         <p class="my-2">
           I'm a software engineer based in Wrocław, Poland. I would consider
           myself as a full stack&nbsp;
-          <span class="text-primary font-weight-bold">Web Developer</span>
+          <span class="text-primary font-weight-bold"> Web Developer </span>
           currently working as
-          <span class="text-primary font-weight-bold">Technical Leader</span>
-          and
-          <span class="text-primary font-weight-bold">Team Leader</span>.
-          I&nbsp;work in a great&nbsp;team&nbsp;of&nbsp;5 on a production
-          planning and scheduling SaaS software.
+          <span class="text-primary font-weight-bold">
+            Senior Fullstack Developer
+          </span>
+          at
+          <a
+            class="underline"
+            href="https://www.statscore.com/"
+            target="_blank"
+            variant="plain"
+          >
+            Statscore
+          </a>
+          collecting sport data from around the world.
+        </p>
+        <p class="my-2">
+          Former
+          <span class="text-primary font-weight-bold"> Technical Leader </span>
+          at Host working on a production planning and scheduling SaaS software.
         </p>
         <p class="mb-2">
           In my free time, besides coding, I like to
@@ -74,6 +87,10 @@ import yeastUrl from './assets/yeast.png';
 <style scoped lang="scss">
 .text {
   backdrop-filter: blur(12px);
+}
+
+a {
+  color: inherit;
 }
 
 .underline {
